@@ -24,8 +24,8 @@ function discoverMovies(callback) {
 			api_key: api.token,
 		},
 		success: function(response) {
-			console.log("We got a response from The Movie DB!");
-			console.log(response);
+			// console.log("We got a response from The Movie DB!");
+			// console.log(response);
 
 			// TODO 2
 			// update the model, setting its .browseItems property equal to the movies we recieved in the response
@@ -35,7 +35,9 @@ function discoverMovies(callback) {
       var movies = response.results;
       for (var i = 0; i < movies.length; i++){
         var movie = movies[i];
-        console.log(movie.title);
+        // console.log(movie.title);
+        model.browseItems.push(movie.title);
+        console.log(model.browseItems);
       }
 
 			callback();

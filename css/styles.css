@@ -6,21 +6,6 @@ For CSS stuff, make good use of the Chrome Developer Tools:
 */
 
 
-/*
-TODO 4
-add a selector for elements with class "item-watchlist"
-give these elements a display property of inline-block
-and then style them as shown in the example (padding, margin, background, etc)
-*/
-
-
-/*
-TODO 5 
-Make all elements have color: gray; by default
-Hint: just apply the style using a parent selector, and then all 
-descendent elements will automatically inherit the same styles
-*/
-
 
 #big-header {
 	background: gray;
@@ -29,12 +14,24 @@ descendent elements will automatically inherit the same styles
 }
 
 #section-browse {
-	background: #eee;	
+	background: #eee;
 }
 
 #section-browse li {
 	margin-bottom: 40px;
 	list-style: none;
+}
+
+body {
+	color: grey;
+}
+
+.item-watchlist {
+	display: inline-block;
+	margin: 10px 10px 0px 0px;
+	padding: 60px;
+	background: orange;
+	color: white;
 }
 
 section header {
@@ -51,10 +48,10 @@ ul {
 
 button, input[type="submit"] {
 	border-width: 0px;
-	/*
-	TODO 7
-	give these buttons some padding, and color them orange with white text
-	*/
+	padding: 10px;
+	background: orange;
+	border-width: 0px;
+	color: white;
 }
 
 button:disabled {

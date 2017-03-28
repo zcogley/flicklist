@@ -14,7 +14,7 @@ var model = {
 
 var api = {
   root: "https://api.themoviedb.org/3",
-  token: "2b4581cc2d56025d4ca9ae36318573ce" 
+  token: "2b4581cc2d56025d4ca9ae36318573ce"
 }
 
 
@@ -32,7 +32,6 @@ function discoverMovies(callback) {
     },
     success: function(response) {
       model.browseItems = response.results;
-      console.log(model.browseItems)
       callback();
     }
   });
@@ -47,13 +46,17 @@ function discoverMovies(callback) {
  * the callback function that was passed in
  */
 function searchMovies(searchTerm, callback) {
-  console.log("searching for movies with '" + searchTerm + "' in their title...");
-
-  // TODO 9
-  // implement this function as described in the comment above
-  // you can use the body of discoverMovies as a jumping off point
-
-
+  $.ajax({
+    url: api.root + "/search/movie",
+    data: {
+      api_key: api.token,
+      query: searchTerm,
+    },
+    success: function(response){
+      model.browseItems = response.results;
+      callback();
+    }
+  });
 }
 
 
@@ -71,8 +74,8 @@ function render() {
     var title = $("<p></p>").text(movie.original_title);
     var itemView = $("<li></li>")
       .append(title)
-      // TODO 3
-      // give itemView a class attribute of "item-watchlist"
+      // gives itemView a class attribute of "item-watchlist"
+      .attr("class", "item-watchlist")
 
     $("#section-watchlist ul").append(itemView);
   });
@@ -86,10 +89,12 @@ function render() {
         model.watchlistItems.push(movie);
         render();
       });
-      // TODO 2
-      // the button should be disabled if this movie is already in
-      // the user's watchlist
-      // see jQuery .prop() and Array.indexOf()
+
+      // disables button if  movie is already in the user's watchlist
+      var UserList = model.watchlistItems;
+      if (UserList.indexOf(movie) >= 0){
+        button.prop("disabled", true);
+      };
 
     // creates a paragraph containing the movie object's .overview value
     var overview = $("<p></p>").text(movie.overview);

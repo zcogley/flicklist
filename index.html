@@ -28,14 +28,12 @@
     <header>
       <h2>Browse Movies</h2>
       <!--
-      TODO 6
-      add a <form> here for users to search for movies by title
+      <form>  for users to search for movies by title
       -->
       <form id="form-search">
-        <input type="text" name="query">
-        <input type="submit" value="Search By Title">
+        <input type="text" name="query"/>
+        <input type="submit" value="Search By Title"/>
       </form>
-
     </header>
 
     <ul></ul>
@@ -44,20 +42,19 @@
   <script src="js/flicklist.js"></script>
 
   <script>
-    // TODO 8
-    // fill in the missing pieces of the code below
+    $(document).ready(function() {
+      $("#form-search").submit(function(evt) {
+        // cancels the default action
+        evt.preventDefault();
+        // figure out what the user typed
+        var searchTerm = $("#form-search input[name=query]").val();
+        // invokes the searchMovies function, passing in the search term, and render as the callback
+        searchMovies(searchTerm, render);
+      });
 
-    $("#form-search").submit(function(evt) {
-
-      // first, we cancel the default action (which would leave the page)
-      evt.preventDefault();
-
-      // figure out what the user typed
-      var searchTerm = $("#form-search input[name=query]").val();
-
-      // invokes the searchMovies function, passing in the search term, and render as the callback
-      searchMovies(searchTerm, render);
-
+      // even though we have the search form, we still want to fetch
+      // immediately here on doc ready so that the user sees some content initially
+      discoverMovies(render);
     });
   </script>
 

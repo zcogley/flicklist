@@ -32,7 +32,7 @@ function discoverMovies(callback) {
     },
     success: function(response) {
       model.browseItems = response.results;
-      callback();
+      callback(response);
     }
   });
 }
@@ -54,7 +54,7 @@ function searchMovies(searchTerm, callback) {
     },
     success: function(response){
       model.browseItems = response.results;
-      callback();
+      callback(response);
     }
   });
 }

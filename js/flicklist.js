@@ -18,7 +18,7 @@ var api = {
     // TODO 4b
     // implement this function
 
-    return "http://images5.fanpop.com/image/photos/25100000/movie-poster-rapunzel-and-eugene-25184488-300-450.jpg"
+    return "http://image.tmdb.org/t/p/w300/" + movie.poster_path
   }
 }
 
@@ -76,15 +76,18 @@ function render() {
 
   // insert watchlist items
   model.watchlistItems.forEach(function(movie) {
+
     var title = $("<h6></h6>").text(movie.original_title);
 
-    // TODO 1
-    // add an "I watched it" button and append it below the title
-    // Clicking should remove this movie from the watchlist and re-render
+      var titleDiv = $("<div></div>")
+        .attr("class", "panel-heading")
+        .append(title);
 
-    // TODO 2i
-    // apply the classes "btn btn-danger" to the "I watched it button"
-    var button = $("<button></button>")
+    var movieImage = $("<img></img>")
+        .attr("src", api.posterUrl(movie))
+        .attr("class", "img-responsive");
+
+    var removeButton = $("<button></button>")
       .text("I watched it")
       .click(function() {
         model.watchlistItems.pop(movie);
@@ -92,17 +95,15 @@ function render() {
       })
       .attr("class", "btn btn-danger");
 
+    var bodyDiv = $("<div></div>")
+      .attr("class", "panel-body")
+      .append(movieImage)
+      .append(removeButton);
 
-    // TODO 4a
-    // add a poster image and append it inside the
-    // panel body above the button
-
-    // TODO 2g
-    // re-implement the li as a bootstrap panel with a heading and a body
     var itemView = $("<li></li>")
-      .append(title)
-      .append(button)
-      .attr("class", "item-watchlist");
+      .append(titleDiv)
+      .append(bodyDiv)
+      .attr("class", "panel panel-default");
 
     $("#section-watchlist ul").append(itemView);
   });
@@ -133,7 +134,6 @@ function render() {
     // append the itemView to the list
     $("#section-browse ul").append(itemView);
   });
-
 }
 
 
